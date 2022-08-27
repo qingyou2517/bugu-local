@@ -1,13 +1,19 @@
 <template>
   <div>
-<!--     路由切换视图-->
+    <!--     路由切换视图-->
     <router-view/>
     <hr/>
 
   </div>
 </template>
 
+<!--App.vue定义全局的样式，所以不能有scoped-->
 <style lang="scss">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

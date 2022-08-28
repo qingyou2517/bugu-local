@@ -1,22 +1,22 @@
 <template>
   <!--     点击链接切换路由-->
-  <div class="nav">
-    <router-link to="/money">
+  <nav>
+    <router-link to="/money" class="item">
       <Icon name='money'/>
       记账
     </router-link>
     |
-    <router-link to="/labels">
+    <router-link to="/labels" class="item">
       <!--上面 labels 是路由，下面 label 是svg名字-->
       <Icon name='label'/>
       栏目
     </router-link>
     |
-    <router-link to="/statistics">
+    <router-link to="/statistics" class="item">
       <Icon name='statistics'/>
       统计
     </router-link>
-  </div>
+  </nav>
 </template>
 
 <script lang='ts'>
@@ -28,8 +28,26 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.nav {
-  border: 1px solid red;
-
-}
+  nav{
+    display: flex;
+    // box-shadow让导航栏看起像 浮起来
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    > .item {
+      width: 33.33%;
+      // 居中
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2px 0;
+      // 引入svg时，svg-sprite-loader把svg转换成的symbol里自带class='icon'
+      // 可以在浏览器里看symbol标签
+      // 当然，也可以自己加上class
+      .icon{
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
 </style>

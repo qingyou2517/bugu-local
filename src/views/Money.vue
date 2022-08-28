@@ -1,104 +1,14 @@
 <template>
-  <div class="nav-wrapper">
-    <div class="content">
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-      <p>Money.vue</p>
-    </div>
-    <Nav />
-  </div>
+  <Layout>
+    <p>Money.vue</p>
+  </Layout>
 </template>
 
 <script lang='ts'>
+import Layout from '@/components/Layout.vue';
 export default {
-  name: 'Money'
+  name: 'Money',
+  components: {Layout}
 };
 </script>
 
-<!--加scoped，只影响对应那几个标签-->
-<style lang='scss' scoped>
-  .nav-wrapper{
-    border: 1px solid green;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-
-  .content{
-    border: 1px solid blue;
-    overflow: auto;
-    flex-grow: 1;
-  }
-</style>

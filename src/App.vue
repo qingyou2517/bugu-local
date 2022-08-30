@@ -14,6 +14,7 @@
   body{
     line-height: 1.5;
     font-family: $font-hei;
+    font-size: 16px;
   }
 
   // index.html中的div#app被vue的template代替了

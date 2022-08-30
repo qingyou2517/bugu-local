@@ -28,31 +28,32 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-nav {
-  display: flex;
-  // box-shadow让导航栏看起像 浮起来
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-  font-size: 12px;
-
-  > .item {
-    width: 33.33%;
-    // 居中
+  @import "~@/assets/styles/helper.scss";
+  nav {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 2px 0;
-    // 引入svg时，svg-sprite-loader把svg转换成的symbol里自带class='icon'
-    // 可以在浏览器里看symbol标签
-    // 当然，也可以自己加上class
-    .icon {
-      width: 32px;
-      height: 32px;
+    // box-shadow让导航栏看起像 浮起来
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+
+    > .item {
+      width: 33.33%;
+      // 居中
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2px 0;
+      // 引入svg时，svg-sprite-loader把svg转换成的symbol里自带class='icon'
+      // 可以在浏览器里看symbol标签
+      // 当然，也可以自己加上class
+      .icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    > .item.selected {
+      color: $color-highlight;
     }
   }
-
-  > .item.selected {
-    color: orange;
-  }
-}
 </style>

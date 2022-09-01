@@ -16,7 +16,7 @@ module.exports = {
       .use('svg-sprite-loader').loader('svg-sprite-loader')
       .options({extract: false}).end()    // 不解析出文件
       .use('svgo-loader').loader('svgo-loader')
-      // .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]}))
+      .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]}))
       .end()    // 如果s  vg自带fill属性，删除svg里的fill
 
     // 配置 plugin 插件

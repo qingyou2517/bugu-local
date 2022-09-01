@@ -2,25 +2,24 @@
   <!--     点击链接切换路由-->
   <nav>
     <router-link to="/money" class="item" active-class="selected">
-      <Icon name='money'/>
+      <Icon name='money2'/>
       记账
     </router-link>
     |
     <router-link to="/labels" class="item" active-class="selected">
-      <!--上面 labels 是路由，下面 label 是svg名字-->
-      <Icon name='label'/>
+      <Icon name='label2'/>
       栏目
     </router-link>
     |
     <router-link to="/statistics" class="item" active-class="selected">
-      <Icon name='statistics'/>
+      <Icon name='statistics2'/>
       统计
     </router-link>
   </nav>
 </template>
 
 <script lang='ts'>
-// import x from '@/assets/icons/money.svg';
+// import x from '@/assets/icons/money2.svg';
 
 export default {
   name: 'Nav'

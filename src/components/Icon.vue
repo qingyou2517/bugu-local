@@ -3,6 +3,7 @@
     <svg class="icon">
       <use v-bind:xlink:href="'#'+name" />
     </svg>
+
 </template>
 
 <script lang='ts'>

@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 
 @Component
 
@@ -57,7 +57,7 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-
+    this.$emit('update:value',this.output)
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <!-- 导航栏的svg不能套在div里 -->
-    <svg class="icon">
+    <svg class="icon" @click="$emit('click',$event)">
       <use v-bind:xlink:href="'#'+name" />
     </svg>
 

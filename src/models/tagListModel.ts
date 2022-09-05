@@ -1,3 +1,5 @@
+import createId from '@/lib/createId';
+
 const localStorageKeyName = 'tagList';
 type Tag = {
   id: string
@@ -29,7 +31,8 @@ const tagListModel: TagListModel = {
       return 'duplicated';
     }
     //id为以后服务器生成id做准备，以后再更改id
-    this.data.push({id: name, name: name});
+    const id = createId().toString();
+    this.data.push({id: id, name: name});
     this.save();
     return 'success';
   },

@@ -70,6 +70,7 @@ export default class NumberPad extends Vue {
 .numberPad {
   .output {
     @extend %innerShadow;
+    background: #ffffff;
     font-size: 36px;
     font-family: Consolas, monospace;
     padding: 9px 16px;

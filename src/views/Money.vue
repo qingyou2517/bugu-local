@@ -23,13 +23,12 @@ import recordListModel from '@/models/recordListModel';
 import tagListModel from '@/models/tagListModel';
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   components: {Tags, Notes, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   // Record类型的数组，每一项都是一个Record类型的数据
   recordList: RecordItem[] = recordList;
   record: RecordItem = {

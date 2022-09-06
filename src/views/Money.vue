@@ -18,10 +18,7 @@ import NumberPad from '@/components/Money/NumberPad.vue';
 import Types from '@/components/Money/Types.vue';
 import Notes from '@/components/Money/Notes.vue';
 import Tags from '@/components/Money/Tags.vue';
-import {Component, Watch} from 'vue-property-decorator';
-import recordListModel from '@/models/recordListModel';
-
-const recordList = recordListModel.fetch();
+import {Component} from 'vue-property-decorator';
 
 @Component({
   components: {Tags, Notes, Types, NumberPad}
@@ -29,7 +26,7 @@ const recordList = recordListModel.fetch();
 export default class Money extends Vue {
   tags = window.tagList;
   // Record类型的数组，每一项都是一个Record类型的数据
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
   record: RecordItem = {
     tags: [],
     notes: '',
@@ -50,12 +47,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    recordListModel.createItem(this.record)
-  }
-
-  @Watch('recordList')
-  onRecordListChange() {
-    recordListModel.save();
+    window.createRecord(this.record);
   }
 }
 </script>
@@ -65,7 +57,8 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
-.wrapper{
+
+.wrapper {
   padding: 12px 0;
 }
 </style>

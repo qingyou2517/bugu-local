@@ -7,8 +7,7 @@
              placeholder="可以在这里输入备注"
              @update:value="onUpdateNotes"/>
     </div>
-    <Tags :data-source.sync="tags"
-          @update:value="onUpdateTags"/>
+    <Tags/>
   </Layout>
 </template>
 
@@ -25,19 +24,13 @@ import store from '@/store/index2';
   components: {Tags, Notes, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = store.tagList;
   // Record类型的数组，每一项都是一个Record类型的数据
-  recordList = store.recordList;
   record: RecordItem = {
     tags: [],
     notes: '',
     type: '',
     amount: 0
   };
-
-  onUpdateTags(tags: string[]) {
-    this.record.tags = tags;
-  }
 
   onUpdateNotes(notes: string) {
     this.record.notes = notes;

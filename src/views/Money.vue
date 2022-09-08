@@ -21,13 +21,12 @@ import {Component} from 'vue-property-decorator';
 
 @Component({
   components: {Tags, Notes, Types, NumberPad},
-  computed: {
-    recordList() {
-      return this.$store.state.recordList;
-    }
-  }
 })
 export default class Money extends Vue {
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+
   // Record类型的数组，每一项都是一个Record类型的数据
   record: RecordItem = {
     tags: [],

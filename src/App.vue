@@ -7,18 +7,6 @@
   </div>
 </template>
 
-<script lang="js">
-import store from '@/store/index2'
-
-export default {
-  data() {
-    return {
-      store: store
-    }
-  }
-}
-</script>
-
 <!--App.vue定义全局的样式，所以不能有scoped-->
 <style lang="scss">
 @import "~@/assets/styles/helper.scss";

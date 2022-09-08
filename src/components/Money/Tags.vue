@@ -13,8 +13,9 @@
 </template>
 
 <script lang='ts'>
-import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import TagHelper from '@/mixins/TagHelper';
+import {mixins} from 'vue-class-component';
 
 @Component({
   computed: {
@@ -23,7 +24,7 @@ import {Component} from 'vue-property-decorator';
     }
   }
 })
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper) {
   selectedTags: string[] = [];
 
   created() {
@@ -38,15 +39,6 @@ export default class Tags extends Vue {
       this.selectedTags.push(tag);
     }
     this.$emit('update:value', this.selectedTags);
-  }
-
-  createTag() {
-    const name = window.prompt('请输入标签名：');
-    if (!name) {
-      window.alert('标签名不能为空！');
-      return;
-    }
-    this.$store.commit('createTag', name);
   }
 }
 </script>

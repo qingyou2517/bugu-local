@@ -1,38 +1,43 @@
 <template>
-  <div>
-    <ul class="types">
+  <ul class="tabs">
     <!--  []表示内部是变量    -->
-      <li :class="{selected:value==='-',[classPrefix+'-item']:classPrefix}"
-          @click="selectType('-')">支出
-      </li>
-      <li :class="{selected:value==='+',[classPrefix+'-item']:classPrefix}"
-          @click="selectType('+')">收入
-      </li>
-    </ul>
-  </div>
+    <li v-for="item in dataSource" :key="item.value"
+        :class="liClass(item)" @click="select(item)">
+      {{item.text}}
+    </li>
+  </ul>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 
+type DataSourceItem={
+  text:string,
+  value:string
+}
+
 @Component
-//上面告知了这是组件，那么下面type和selectType分别会被处理为data和methods
-export default class Types extends Vue {
+export default class Tabs extends Vue {
+  @Prop({required: true, type: Array}) dataSource!: { text: string, value: string }[];
+
   @Prop(String) readonly value!: string;
   @Prop(String) classPrefix?: string;
 
-  selectType(type: string) { // type必须是'-'或'+'
-    if (type !== '-' && type !== '+') {
-      throw new Error('type is unknown');
+  liClass(item:DataSourceItem){
+    return {
+      selected:item.value===this.value,
+      [this.classPrefix+'-tabs-item']:this.classPrefix
     }
-    this.$emit('update:value', type);
+  }
+  select(item:DataSourceItem){
+    this.$emit('update:value',item.value)
   }
 }
 </script>
 
 <style lang='scss' scoped>
-.types {
+.tabs {
   background: #c4c4c4;
   display: flex;
   text-align: center;

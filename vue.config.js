@@ -2,6 +2,9 @@ const path = require('path')
 
 // 配置 svg-sprite-loader 和 plugin 插件
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/Morney-website/'
+    : '/',
   lintOnSave: false,
   chainWebpack: config => {
     // 获取 icons 所在目录 => dir

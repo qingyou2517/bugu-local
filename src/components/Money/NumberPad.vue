@@ -44,7 +44,12 @@ export default class NumberPad extends Vue {
       }
       return;
     }
-    if (this.output.indexOf('.') >= 0 && input === '.') {return;}
+    const index = this.output.indexOf('.')
+    if (index >= 0) {
+      const index2 = this.output.indexOf('.') + 3;
+      if (this.output.length >= index2) {return;}
+      if ( input === '.') {return;}
+    }
     this.output += input;
   }
 
@@ -61,7 +66,7 @@ export default class NumberPad extends Vue {
     const number = parseFloat(this.output);
     this.$emit('update:value', number);
     this.$emit('submit', number);
-    this.output='0'
+    this.output = '0';
   }
 }
 </script>

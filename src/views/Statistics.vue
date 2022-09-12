@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <ol>
+    <ol v-if="groupedList.length>0">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
         <ol>
@@ -14,6 +14,9 @@
         </ol>
       </li>
     </ol>
+    <div v-else class="noResult">
+      目前没有相关记录
+    </div>
   </Layout>
 </template>
 
@@ -24,14 +27,16 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+
 @Component({
   components: {Tabs},
 })
 export default class Statistics extends Vue {
   // eslint-disable-next-line no-undef
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.join(',');
+    return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
   }
+
   beautify(string: string) {
     const day = dayjs(string);
     const now = dayjs();
@@ -48,18 +53,23 @@ export default class Statistics extends Vue {
       return day.format('YYYY年M月D日');
     }
   }
+
   get recordList() {
     // eslint-disable-next-line no-undef
     return (this.$store.state as RootState).recordList;
   }
+
   get groupedList() {
     const {recordList} = this;
     if (recordList.length === 0) {return [];}
     const newList = clone(recordList)
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    if (newList.length === 0) {return [];}
+
     type Result = { title: string, total?: number, items: RecordItem[] }[]
     const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
@@ -78,30 +88,41 @@ export default class Statistics extends Vue {
     });
     return result;
   }
+
   beforeCreate() {
     this.$store.commit('fetchRecords');
   }
+
   type = '-';
   recordTypeList = recordTypeList;
 }
 </script>
 
 <style scoped lang="scss">
+.noResult {
+  padding: 16px;
+  text-align: center;
+}
+
 ::v-deep {
   .type-tabs-item {
     background: #C4C4C4;
+
     &.selected {
       background: white;
-      border-bottom: 3px solid orange;
+      border-bottom: 3px solid #46ad86;
+
       &::after {
         display: none;
       }
     }
   }
+
   .interval-tabs-item {
     height: 48px;
   }
 }
+
 %item {
   padding: 8px 16px;
   line-height: 24px;
@@ -109,13 +130,16 @@ export default class Statistics extends Vue {
   justify-content: space-between;
   align-content: center;
 }
+
 .title {
   @extend %item;
 }
+
 .record {
   background: white;
   @extend %item;
 }
+
 .notes {
   margin-right: auto;
   margin-left: 16px;

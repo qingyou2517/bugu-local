@@ -91,6 +91,13 @@ export default class Statistics extends Vue {
           show: true,
           alignWithLabel: true
         },
+        axisLabel:{
+          // 使用函数模板，函数参数分别为刻度数值（类目），刻度的索引
+          formatter: function (value:string, index:number) {
+            // 格式化成月-日
+            return value.substring(5);
+          }
+        },
         type: 'category',
         data: dates
       },

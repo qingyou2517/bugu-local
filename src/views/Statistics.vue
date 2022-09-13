@@ -49,7 +49,7 @@ export default class Statistics extends Vue {
     }
   }
   get keyValueList(){
-    console.log(this.groupedList);
+    // console.log(this.groupedList);
     const today = new Date();
     const array = [];
     for (let i = 0; i <= 29; i++) {
@@ -80,6 +80,7 @@ export default class Statistics extends Vue {
   get chartOptions() {
     const dates = this.keyValueList.map(item => item.key);
     const values = this.keyValueList.map(item => item.value);
+    // console.log(values);
     return {
       //消除echarts的四周padding(来自谷歌：echarts padding解答，事实上官方文档里echarts的绘图区域是grid)
       grid: {

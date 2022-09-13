@@ -3,10 +3,16 @@
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type" />
-    <div class="wrapper">
+    <div class="notes" >
       <Notes field-name="备注："
              placeholder="可以在这里输入备注"
              :value.sync="record.notes"/>
+    </div>
+    <div class="createdAt" >
+      <Notes field-name="日期："
+             type="date"
+             placeholder="可以在这里输入日期"
+             :value.sync="record.createdAt"/>
     </div>
     <Tags @update:value="record.tags = $event" />
   </Layout>
@@ -36,7 +42,8 @@ export default class Money extends Vue {
     tags: [],
     notes: '',
     type: '',
-    amount: 0
+    amount: 0,
+    createdAt:new Date().toISOString()
   };
 
   created() {
@@ -70,8 +77,12 @@ export default class Money extends Vue {
   flex-direction: column-reverse;
 }
 
-.wrapper {
-  padding: 12px 0;
+.notes {
+  //padding-bottom: 12px;
+  background: #ffffff;
+}
+.createdAt{
+  //padding-top: 12px;
 }
 </style>
 

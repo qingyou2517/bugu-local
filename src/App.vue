@@ -26,8 +26,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #333;
-  max-width: 500px;
-  margin: 0 auto;
+  //max-width: 500px;
+  //margin: 0 auto;
 }
 
 #nav {

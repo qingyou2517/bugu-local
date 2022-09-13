@@ -48,18 +48,20 @@ export default class Statistics extends Vue {
       div.scrollLeft = div.scrollWidth;
     }
   }
-
   get keyValueList(){
+    console.log(this.groupedList);
     const today = new Date();
     const array = [];
     for (let i = 0; i <= 29; i++) {
       // this.recordList=[{createdAt:'2022-09-01',amount:1.00,...},{},]
+      // this.groupedList=[{title:'2022-09-01',items:[{},{},],total:1.00,...},{},]
       // array=[{key:'2022-09-01',value:1.00},{},]
+
       const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
 
-      const found = _.find(this.recordList, {createdAt: dateString});
+      const found = _.find(this.groupedList, {title: dateString});
 
-      array.push({key: dateString, value: found ? found.amount : 0});
+      array.push({key: dateString, value: found ? found.total : 0});
     }
     array.sort((a, b) => {
       if (a.key > b.key) {

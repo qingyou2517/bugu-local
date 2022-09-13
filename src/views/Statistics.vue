@@ -1,6 +1,9 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
+    <div class="chart-wrapper" ref="chartWrapper">
+      <Chart class="chart" :options="x"/>
+    </div>
     <ol v-if="groupedList.length>0">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
@@ -27,14 +30,60 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import Chart from '@/components/Chart.vue';
 
 @Component({
-  components: {Tabs},
+  components: {Tabs, Chart},
 })
 export default class Statistics extends Vue {
   // eslint-disable-next-line no-undef
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
+  }
+
+  mounted() {
+    if (this.$refs.chartWrapper) {
+      (this.$refs.chartWrapper as HTMLDivElement).scrollLeft = 9999;
+    }
+  }
+
+  get x() {
+    return {
+      //消除echarts的四周padding(来自谷歌：echarts padding解答，事实上官方文档里echarts的绘图区域是grid)
+      grid: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 30
+      },
+      xAxis: {
+        axisTick:{
+          show:true,
+          alignWithLabel:true
+        },
+        type: 'category',
+        data: [
+          '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+          '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+          '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
+        ]
+      },
+      yAxis: {
+        type: 'value',
+        show: false
+      },
+      series: [{
+        symbolSize: 12,
+        data: [
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320, 1, 2
+        ],
+        type: 'line'
+      }],
+      tooltip: {show: true}
+    };
   }
 
   beautify(string: string) {
@@ -43,7 +92,6 @@ export default class Statistics extends Vue {
     if (day.isSame(now, 'day')) {
       return '今天';
     } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
-      console.log('hi');
       return '昨天';
     } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
       return '前天';
@@ -144,5 +192,19 @@ export default class Statistics extends Vue {
   margin-right: auto;
   margin-left: 16px;
   color: #999;
+}
+
+.chart {
+  //希望一个屏幕展示7天数据，那30天需要 4+（2/7）个屏幕，约430%
+  width: 430%;
+  //横向滚动
+  &-wrapper {
+    overflow: auto;
+    //google: css hide scrollbar
+    //隐藏滚动条，PC端需要方向键滚动
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 </style>

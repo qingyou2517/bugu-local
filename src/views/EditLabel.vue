@@ -68,7 +68,7 @@ export default class EditLabel extends Vue {
   justify-content: space-between;
 
   > .title {
-
+    color: #000;
   }
 
   > .leftIcon {

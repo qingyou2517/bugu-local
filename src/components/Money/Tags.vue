@@ -6,7 +6,8 @@
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
-          @click="toggle(tag)">{{ tag.name }}
+          @click="toggle(tag)">
+        {{ tag.name }}
       </li>
     </ul>
   </div>
@@ -53,16 +54,25 @@ export default class Tags extends mixins(TagHelper) {
   > .current {
     display: flex;
     flex-wrap: wrap;
+    margin-right: -16px;
+    height: calc(100vh - 50px - 80px - 58px - 192px - 54px - 72px);
+    overflow-y: auto;
+    //&::-webkit-scrollbar {
+    //  display: none;
+    //}
 
     > li {
-      background: #d9d9d9;
-      $h: 24px;
+      $h: 28px;
       height: $h;
+      display: flex;
+      justify-content: center;
+      width: 72px;
+      background: #fef0eb;
+      margin-right: 17px;
+      margin-top: 8px;
       border-radius: $h/2;
-      padding: 0 16px;
-      margin-right: 12px;
-      margin-top: 4px;
       line-height: $h;
+      text-align: center;
 
       &.selected {
         background: orange;
@@ -77,7 +87,7 @@ export default class Tags extends mixins(TagHelper) {
       background: transparent;
       border: none;
       border-bottom: 1px solid;
-      color: #999;
+      color: #f60;
       padding: 0 3px;
     }
   }

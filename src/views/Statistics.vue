@@ -4,7 +4,7 @@
     <div class="chart-wrapper" ref="chartWrapper">
       <Chart class="chart" :options="chartOptions"/>
     </div>
-    <ol v-if="groupedList.length>0">
+    <ol v-if="groupedList.length>0" class="result">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
         <ol>
@@ -183,14 +183,16 @@ export default class Statistics extends Vue {
 
 ::v-deep {
   .type-tabs-item {
-    background: #C4C4C4;
-
+    background: #ff898d;
+    color: #ffffff;
+    //border: 1px solid red;
     &.selected {
-      background: white;
-      border-bottom: 3px solid #46ad86;
+      color: lightskyblue;
+      border-bottom: 3px solid #000;
 
       &::after {
         display: none;
+        //border-bottom: 2px solid #000;
       }
     }
   }
@@ -234,6 +236,14 @@ export default class Statistics extends Vue {
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+}
+
+.result{
+  height: calc(100vh - 50px - 200px - 54px);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 </style>

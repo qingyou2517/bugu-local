@@ -26,6 +26,15 @@ export default class Chart extends Vue {
   onOptionsChange(newValue:EChartsOption){
     this.chart!.setOption(newValue)
   }
+  beforeUnmount() {
+    console.log('beforeUnmount')
+    if (!this.chart) {
+      return
+    }
+    // window.removeEventListener('resize', this.__resizeHandler)
+    this.chart.dispose()
+    this.chart = undefined
+  }
 }
 </script>
 

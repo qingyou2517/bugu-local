@@ -8,7 +8,7 @@
     |
     <router-link to="/labels" class="item" active-class="selected">
       <Icon name='label2'/>
-      栏目
+      标签
     </router-link>
     |
     <router-link to="/statistics" class="item" active-class="selected">
@@ -32,6 +32,7 @@ export default {
     display: flex;
     // box-shadow让导航栏看起像 浮起来
     @extend %outShadow;
+    background: #ffffff;
     font-size: 12px;
 
     > .item {

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Menu, MessageBox, Message, DatePicker} from 'element-ui';
+import {Menu, MessageBox, Message, DatePicker, Tabs, TabPane} from 'element-ui';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';  //如果./router是目录，则默认找它内部文件
@@ -17,6 +17,8 @@ Vue.component('Icon', Icon);
 Vue.component(MessageBox.name, MessageBox);
 Vue.component(Menu.name, Menu);
 Vue.component(DatePicker.name, DatePicker);
+Vue.component(Tabs.name, Tabs)
+Vue.component(TabPane.name, TabPane)
 
 Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$alert = MessageBox.alert;

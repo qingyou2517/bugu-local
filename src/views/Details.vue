@@ -28,7 +28,6 @@ import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
 import Chart from '@/components/Chart.vue';
-import _ from 'lodash';
 
 @Component({
   components: {Tabs, Chart},

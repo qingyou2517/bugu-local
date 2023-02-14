@@ -5,14 +5,19 @@
       <Icon name='money2'/>
       记账
     </router-link>
-    |
+
     <router-link to="/labels" class="item" active-class="selected">
       <Icon name='label2'/>
       标签
     </router-link>
-    |
+
+    <router-link to="/details" class="item" active-class="selected">
+      <Icon name='details'/>
+      明细
+    </router-link>
+
     <router-link to="/statistics" class="item" active-class="selected">
-      <Icon name='statistics2'/>
+      <Icon name="statistics2"/>
       统计
     </router-link>
   </nav>
@@ -34,9 +39,10 @@ export default {
     @extend %outShadow;
     background: #ffffff;
     font-size: 12px;
+    min-height: 54px;
 
     > .item {
-      width: 33.33%;
+      width: 25%;
       // 居中
       display: flex;
       justify-content: center;
@@ -46,10 +52,7 @@ export default {
       // 引入svg时，svg-sprite-loader把svg转换成的symbol里自带class='icon'
       // 可以在浏览器里看symbol标签
       // 当然，也可以自己加上class
-      .icon {
-        width: 32px;
-        height: 32px;
-      }
+      .icon {}
     }
 
     > .item.selected {

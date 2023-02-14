@@ -42,4 +42,16 @@ body {
     }
   }
 }
+
+//element-ui：prompt 输入提交
+.el-message-box{
+  width: 260px;
+}
+
+//element-ui：alert 消息弹出框
+.el-message {
+  top: 20px !important;
+  min-width: 100px !important;
+}
+
 </style>

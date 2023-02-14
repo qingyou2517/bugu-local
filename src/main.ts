@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {Menu, MessageBox, Message} from 'element-ui';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';  //如果./router是目录，则默认找它内部文件
@@ -8,10 +9,17 @@ import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 
 Vue.config.productionTip = false;
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 
 Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
+Vue.component(MessageBox.name, MessageBox);
+Vue.component(Menu.name, Menu);
+
+Vue.prototype.$prompt = MessageBox.prompt;
+Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$message = Message;
 
 new Vue({
   router,   // 等价于 router: router

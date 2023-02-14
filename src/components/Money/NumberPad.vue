@@ -15,7 +15,7 @@
       <button @click="inputContent">9</button>
       <button @click="ok" class="ok">ok</button>
       <button @click="inputContent" class="zero">0</button>
-      <button @click="inputContent">.</button>
+      <button @click="inputContent" class="point">.</button>
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default class NumberPad extends Vue {
     // event.target可能为空，用强制指定消除报错
     const button = (event.target as HTMLButtonElement);
     const input = button.textContent as string;
-    if (this.output.length === 16) {return;}
+    if (this.output.length === 12) {return;}
     if (this.output === '0') {
       if ('0123456789'.indexOf(input) >= 0) {
         this.output = input;
@@ -44,11 +44,11 @@ export default class NumberPad extends Vue {
       }
       return;
     }
-    const index = this.output.indexOf('.')
+    const index = this.output.indexOf('.');
     if (index >= 0) {
       const index2 = this.output.indexOf('.') + 3;
       if (this.output.length >= index2) {return;}
-      if ( input === '.') {return;}
+      if (input === '.') {return;}
     }
     this.output += input;
   }
@@ -87,6 +87,7 @@ export default class NumberPad extends Vue {
 
   .buttons {
     @extend %clearFix;
+    transition: transform 0.2s cubic-bezier(0.68, 0.01, 0.62, 0.6);
 
     > button {
       width: 25%;
@@ -94,6 +95,11 @@ export default class NumberPad extends Vue {
       float: left;
       background: transparent;
       border: none;
+
+      &:active {
+        transform: scale(0.9);
+        opacity: 0.9;
+      }
 
       &.ok {
         height: 48*2px;
@@ -104,34 +110,38 @@ export default class NumberPad extends Vue {
         width: 25%*2;
       }
 
-      $bg: #f5f5f5;
+      &.point{
+        font-weight: bold;
+      }
+
+      $bg: #fff1f0;
 
       &:nth-child(1) {
         background: $bg;
       }
 
       &:nth-child(2), &:nth-child(5) {
-        background: darken($bg, 1%);
+        background: darken($bg, 1.2%);
       }
 
       &:nth-child(3), &:nth-child(6), &:nth-child(9) {
-        background: darken($bg, 1*2%);
+        background: darken($bg, 1.2*2%);
       }
 
       &:nth-child(4), &:nth-child(7), &:nth-child(10) {
-        background: darken($bg, 1*3%);
+        background: darken($bg, 1.2*3%);
       }
 
       &:nth-child(8), &:nth-child(11), &:nth-child(13) {
-        background: darken($bg, 1*4%);
+        background: darken($bg, 1.2*4%);
       }
 
       &:nth-child(14) {
-        background: darken($bg, 1*5%);
+        background: darken($bg, 1.2*5%);
       }
 
       &:nth-child(12) {
-        background: darken($bg, 1*6%);
+        background: darken($bg, 1.2*6%);
       }
     }
   }

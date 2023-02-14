@@ -108,7 +108,7 @@ export default class Money extends Vue {
   flex-direction: column;
   justify-content: space-between;
   padding: 0 20px;
-  background: var(--bg-color-grey);
+  background: #ffccc7;
 
   > .date-box {
     display: flex;

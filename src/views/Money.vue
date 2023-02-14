@@ -61,11 +61,23 @@ export default class Money extends Vue {
 
   saveRecord() {
     if (!this.record.tags || this.record.tags.length === 0) {
-      return window.alert('请至少选择一个标签');
+      return this.$message({
+        type: 'warning',
+        message: '请至少选择一个标签',
+        duration: 2000,
+        // 自定义消息弹出框的标签类名
+        customClass: '.el-message',
+      });
     }
     this.$store.commit('createRecord', this.record);
     if (this.$store.state.createRecordError === null) {
-      window.alert('已保存');
+      this.$message({
+        type: 'success',
+        message: '已保存',
+        duration: 2000,
+        // 自定义消息弹出框的标签类名
+        customClass: '.el-message',
+      });
       this.record.notes = '';
     }
   }

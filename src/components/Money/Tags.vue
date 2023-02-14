@@ -58,7 +58,7 @@ export default class Tags extends mixins(TagHelper) {
     display: flex;
     flex-wrap: wrap;
     margin-right: -16px;
-    height: calc(100vh - 50px - 80px - 58px - 192px - 54px - 72px);
+    height: calc(100vh - 50px - 44px - 40px - 58px - 192px - 54px - 72px);
     overflow-y: auto;
     //&::-webkit-scrollbar {
     //  display: none;

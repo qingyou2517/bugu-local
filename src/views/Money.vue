@@ -2,20 +2,27 @@
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
 
-    <div class="notes" >
+    <div class="notes">
       <Notes field-name="备注："
              placeholder="可以在这里输入备注，至多10个字符"
              :value.sync="record.notes"/>
     </div>
-    <div class="createdAt" >
-      <Notes field-name="日期："
-             type="date"
-             placeholder="可以在这里输入日期"
-             :value.sync="record.createdAt"/>
+    <div class="date-wrapper">
+      <div class="date-box">
+        <div class="block date">
+          <el-date-picker
+              v-model="record.createdAt"
+              type="date"
+              placeholder="选择日期"
+              :editable="false"
+          >
+          </el-date-picker>
+        </div>
+      </div>
     </div>
-    <Tags @update:value="record.tags = $event" />
+    <Tags @update:value="record.tags = $event"/>
     <Tabs :data-source="recordTypeList"
-          :value.sync="record.type" />
+          :value.sync="record.type"/>
   </Layout>
 </template>
 
@@ -32,6 +39,16 @@ import recordTypeList from '@/constants/recordTypeList';
   components: {Tabs, Tags, Notes, NumberPad},
 })
 export default class Money extends Vue {
+  data() {
+    return {
+      pickerOptions: {
+        disabledDate(time: any) {
+          return time.getTime() > Date.now();
+        },
+      },
+    };
+  }
+
   get recordList() {
     return this.$store.state.recordList;
   }
@@ -44,7 +61,7 @@ export default class Money extends Vue {
     notes: '',
     type: '-',
     amount: 0,
-    createdAt:new Date().toISOString()
+    createdAt: new Date().toISOString()
   };
 
   created() {
@@ -85,6 +102,33 @@ export default class Money extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.date-wrapper {
+  //order: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--bg-color-grey);
+
+  > .date-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 44px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background: var(--bg-color-white);
+
+    > .date {
+      width: 100%;
+      margin: 10px 16px 10px;
+
+      .el-date-editor.el-input {
+        width: 100%;
+      }
+    }
+  }
+}
+
 ::v-deep .layout-content {
   display: flex;
   flex-direction: column-reverse;
@@ -94,7 +138,8 @@ export default class Money extends Vue {
   //padding-bottom: 12px;
   background: #ffffff;
 }
-.createdAt{
+
+.createdAt {
   //padding-top: 12px;
 }
 </style>

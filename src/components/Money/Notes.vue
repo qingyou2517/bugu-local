@@ -12,7 +12,8 @@
         <input :type="type || 'text'"
                :value="value"
                @input="onValueChanged($event.target.value)"
-               :placeholder="this.placeholder">
+               :placeholder="this.placeholder"
+               maxlength="10">
       </template>
     </label>
   </div>

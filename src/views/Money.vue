@@ -4,7 +4,7 @@
 
     <div class="notes" >
       <Notes field-name="备注："
-             placeholder="可以在这里输入备注"
+             placeholder="可以在这里输入备注，至多10个字符"
              :value.sync="record.notes"/>
     </div>
     <div class="createdAt" >

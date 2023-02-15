@@ -6,7 +6,7 @@
       <div class="lineChart-wrapper chart-box" ref="chartWrapper">
         <Chart class="lineChart" :options="lineChartOptions"/>
       </div>
-      <span class="introduction">最近30天占比</span>
+      <span class="introduction">最近30天各项占比</span>
       <div class="pieChart-wrapper chart-box">
         <Chart class="pieChart" :options="pieChartOption"/>
       </div>
@@ -169,6 +169,7 @@ export default class Statistics extends Vue {
         top: '5%',
         left: 'left',
         // bottom: '20',
+        // padding-bottom 不知道为什么不能拉开间距
         padding:[10,10,10,10]
       },
       series: [

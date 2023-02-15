@@ -3,13 +3,16 @@
     <div class="new">
       <button @click="createTag">新增标签</button>
     </div>
-    <ul class="current">
-      <li v-for="tag in tagList" :key="tag.id"
-          :class="{selected: selectedTags.indexOf(tag)>=0}"
-          @click="toggle(tag)">
-        {{ tag.name }}
-      </li>
-    </ul>
+    <div class="ul-wrapper">
+      <ul class="current">
+        <li v-for="tag in tagList" :key="tag.id"
+            :class="{selected: selectedTags.indexOf(tag)>=0}"
+            @click="toggle(tag)">
+          {{ tag.name }}
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -54,34 +57,41 @@ export default class Tags extends mixins(TagHelper) {
   display: flex;
   flex-direction: column-reverse;
 
-  > .current {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -16px;
+  > .ul-wrapper {
     height: calc(100vh - 50px - 44px - 40px - 58px - 192px - 54px - 72px);
-    overflow-y: auto;
-    //&::-webkit-scrollbar {
-    //  display: none;
-    //}
 
-    > li {
-      $h: 28px;
-      height: $h;
+    > .current {
       display: flex;
-      justify-content: center;
-      width: 72px;
-      background: #fef0eb;
-      margin-right: 17px;
-      margin-top: 8px;
-      border-radius: $h/2;
-      line-height: $h;
-      text-align: center;
+      flex-wrap: wrap;
+      //多行flex布局
+      align-content: flex-start;
+      margin-right: -16px;
+      height: 100%;
+      overflow-y: auto;
+      //&::-webkit-scrollbar {
+      //  display: none;
+      //}
 
-      &.selected {
-        background: orange;
+      > li {
+        $h: 28px;
+        height: $h;
+        display: flex;
+        justify-content: center;
+        width: 72px;
+        background: #fef0eb;
+        margin-right: 17px;
+        margin-top: 8px;
+        border-radius: $h/2;
+        line-height: $h;
+        text-align: center;
+
+        &.selected {
+          background: lightpink;
+        }
       }
     }
   }
+
 
   > .new {
     padding-top: 16px;

@@ -197,7 +197,9 @@ export default class Statistics extends Vue {
           },
           emphasis: {
             label: {
-              show: true,
+              // 点击legend后，让圆环图中心不显示文字
+              // 但是手机模式下build后还是依旧，官网实例也有这个bug
+              show: false,
               fontSize: '40',
               fontWeight: 'bold'
             }

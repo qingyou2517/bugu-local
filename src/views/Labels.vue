@@ -9,8 +9,9 @@
         <Icon name="right"/>
       </router-link>
     </div>
+
     <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
+      <el-button type="primary" size="medium" class="createTag" @click="createTag">新增<i class="el-icon-edit"></i></el-button>
     </div>
   </Layout>
 
@@ -78,9 +79,9 @@ export default class Labels extends mixins(TagHelper) {
 
 .createTag {
   border: none;
-  background: #ff898d;
+  //background: #ff898d;
   color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   height: 40px;
   padding: 0 16px;
 

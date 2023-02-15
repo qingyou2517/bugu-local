@@ -19,6 +19,7 @@ export default class Chart extends Vue {
     }
     this.chart = echarts.init(this.$refs.wrapper as HTMLDivElement);
     this.chart .setOption(this.options);
+    this.chart.resize()
   }
   //不能只在 mounted 时 setOption，否则切换到“支出”，chart不变；
   //应该只要options变化，就重新渲染chart

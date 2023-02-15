@@ -1,13 +1,15 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <span class="introduction">最近30天</span>
-    <div class="lineChart-wrapper chart-box" ref="chartWrapper">
-      <Chart class="lineChart" :options="lineChartOptions"/>
-    </div>
-    <span class="introduction">构成</span>
-    <div class="pieChart-wrapper chart-box">
-      <Chart class="pieChart" :options="pieChartOption"/>
+    <div class="chart-wrapper">
+      <span class="introduction">最近30天趋势</span>
+      <div class="lineChart-wrapper chart-box" ref="chartWrapper">
+        <Chart class="lineChart" :options="lineChartOptions"/>
+      </div>
+      <span class="introduction">最近30天占比</span>
+      <div class="pieChart-wrapper chart-box">
+        <Chart class="pieChart" :options="pieChartOption"/>
+      </div>
     </div>
   </Layout>
 </template>
@@ -69,34 +71,43 @@ export default class Statistics extends Vue {
     return array;
   }
 
-  // 获取饼图最近一个月的支出数据
+  // 获取饼图最近一个月的收/支数据
   get pieKeyValueList() {
     // 用来存放标签以及对应的金额的哈希表和数组
     const map = new Map();
-    const array: { key: string, value: number }[] = [];
+    const array: { value: number, name: string }[] = [];
     const today = new Date();
 
+    // 声明对象的键值对类型
+    // obj 存放每个标签对应的消费：key对应标签，value对应最近30天消费总额
+    const obj: Record<string, number> = {};
+
     // 到今天为止的最近30天
-    for (let i = 0; i <= 1; i++) {
+    for (let i = 0; i <= 29; i++) {
       // 格式化时间字符串，以便根据 时间字符串 搜索该天对应的支出数据：found
       const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
-
       const found = _.find(this.groupedList, {title: dateString});
 
-      // 如果这一天的收/支金额不为空，那么就统计每个标签对应的收/支
-      if (found) {
-        for (let j = 0; j <= found.items.length; j++) {
-          if (found.items[j]) {
-            //map.set(key,value) 构造 {key => value} 的键值对
-            map.set(found.items[j].tags[0].name, found.items[j].amount);
+      // found.items 是一个存放某天所有消费情况的数组
+      // 计算{标签1：30天总额，标签2: 30天总额...} ，存入 obj
+      let tagName_amount = 0;
+      // console.log('found', found);
+      if (found?.items) {
+        for (let k = 0; k < found.items.length; k++) {
+          let tagName = found.items[k].tags[0].name;
+          tagName_amount = found.items[k].amount;
+          if (tagName in obj) {
+            obj[tagName] += tagName_amount;
+          } else {
+            obj[tagName] = tagName_amount;
           }
         }
       }
     }
-    // console.log('map', map);
-
-    // // 遍历哈希表生成数组
-    map.forEach((key: string, value: number) => array.push({key, value}));
+    // console.log('obj', obj);
+    for (let key in obj) {
+      array.push({value: obj[key], name: key});
+    }
     // console.log('array', array);
     return array;
   }
@@ -145,21 +156,35 @@ export default class Statistics extends Vue {
   // 饼图配置选项
   get pieChartOption() {
     const array = this.pieKeyValueList;
+    // const values = this.lineKeyValueList.map(item => item.value);
     // console.log('array',array);
+
     return {
       tooltip: {
-        trigger: 'item'
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
       },
       legend: {
+        type:'scroll',
         top: '5%',
-        left: 'center'
+        left: 'left',
+        // bottom: '20',
+        padding:[10,10,10,10]
       },
       series: [
         {
-          name: 'Access From',
+          name: '金额',
           type: 'pie',
           radius: ['40%', '70%'],
+          center: ['50%','60%'],
+          // 防止扇形区标签重叠
           avoidLabelOverlap: false,
+          bottom: 10,
+          // pc 端才识别 点击 ！！！
+          // 取消点击legend后在饼状图中心出现的文字
+          // legendHoverLink: true,
+          // 点击/悬浮鼠标，扇形区向外扩大20px
+          selectedOffset: 20,
           itemStyle: {
             borderRadius: 10,
             borderColor: '#fff',
@@ -263,13 +288,15 @@ export default class Statistics extends Vue {
 
 .introduction {
   font-weight: 550;
-  font-size: 20px;
+  font-size: 16px;
   display: inline-block;
+  width: 100%;
   padding: 20px 16px;
 }
 
 .lineChart {
   //希望一个屏幕展示7天数据，那30天需要 4+（2/7）个屏幕，约430%
+  //chart设置超出的宽度，并设置外层容器可滑动
   width: 430%;
 
   &-wrapper {
@@ -282,11 +309,18 @@ export default class Statistics extends Vue {
     }
   }
 }
+.pieChart{
+  //background-color: blue;
+  height: calc(100vh - 50px - 54px - 140px - 200px );
+}
 
-.chart-box{
+.chart-box {
   padding: 0px 5px;
   background: #fff;
 }
 
-
+.chart-wrapper{
+  height: calc(100vh - 50px - 54px);
+  overflow-y: auto;
+}
 </style>

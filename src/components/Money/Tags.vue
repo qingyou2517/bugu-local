@@ -8,7 +8,9 @@
         <li v-for="tag in tagList" :key="tag.id"
             :class="{selected: selectedTags.indexOf(tag)>=0}"
             @click="toggle(tag)">
-          {{ tag.name }}
+          <div class="tagBox">
+            {{ tag.name }}
+          </div>
         </li>
       </ul>
     </div>
@@ -72,26 +74,39 @@ export default class Tags extends mixins(TagHelper) {
       //  display: none;
       //}
 
+      //响应式平均布局：
+      //让 li 宽度占父容器的 25%，这样无论怎么拉伸，一行始终4个
+      //在 li 里面再放 tag，tag宽度占满 li 的宽度，tag设置 margin-right 保持 tag 间距
+      //li 的父容器设 负margin，值等于tag的margin-right
       > li {
-        $h: 28px;
+        $h: 32px;
         height: $h;
         display: flex;
         justify-content: center;
-        width: 72px;
-        background: #fef0eb;
-        margin-right: 17px;
-        margin-top: 8px;
-        border-radius: $h/2;
+        width: 25%;
         line-height: $h;
         text-align: center;
+        margin-top: 8px;
 
-        &.selected {
+        > .tagBox {
+          width: 100%;
+          background: #fef0eb;
+          margin-right: 16px;
+          white-space: nowrap;
+          border-radius: $h/2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+
+        }
+
+        &.selected .tagBox {
           background: lightpink;
         }
       }
     }
   }
-
 
   > .new {
     padding-top: 16px;

@@ -20,7 +20,7 @@ const store = new Vuex.Store({
     },
     createRecord(state, record: RecordItem) {
       const record2: RecordItem = clone(record);
-      record2.createdAt =record2.createdAt || new Date().toISOString();
+      record2.createdAt = record2.createdAt || new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
     },
@@ -63,7 +63,21 @@ const store = new Vuex.Store({
       if (idList.indexOf(id) >= 0) {
         const names = state.tagList.map(item => item.name);
         if (names.indexOf(name) >= 0) {
-          window.alert('标签名重复了');
+          // window.alert('标签名重复了');
+          // 这里this指向store，并且由于Store尚未构造实例，this===undefined，
+          // 所以不能 this.$message
+          Vue.prototype.$message({
+            type: 'error',
+            message: '标签名重复了',
+            duration: 2000,
+          });
+          return;
+        } else if(name.length===0 || name.length>4){
+          Vue.prototype.$message({
+            type: 'error',
+            message: '亲，标签名必须是1到4个字符哦',
+            duration: 3000,
+          });
           return;
         } else {
           const tag = state.tagList.filter(item => item.id === id)[0];

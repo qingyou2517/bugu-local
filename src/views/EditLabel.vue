@@ -9,8 +9,9 @@
     <div class="Notes-wrapper">
       <Notes :value="tag.name"
              @update:value="updateTag"
-             field-name="标签名" placeholder="请输入标签名"/>
+             field-name="标签名" placeholder="请输入1到4个字符"/>
     </div>
+    <span class="reminder">亲，标签名必须是1到4个字符哦</span>
     <div class="Button-wrapper">
       <Button @click="removeTag">删除标签</Button>
     </div>
@@ -85,6 +86,14 @@ export default class EditLabel extends Vue {
 .Notes-wrapper {
   background: #fff;
   margin-top: 8px;
+}
+
+.reminder{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: #ff6600;
 }
 
 .Button-wrapper {

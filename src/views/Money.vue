@@ -1,5 +1,5 @@
 <template>
-  <Layout class-prefix="layout">
+  <Layout class-prefix="layout" :style="{height:h+'px'}">
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
 
     <div class="notes">
@@ -39,6 +39,7 @@ import recordTypeList from '@/constants/recordTypeList';
   components: {Tabs, Tags, Notes, NumberPad},
 })
 export default class Money extends Vue {
+ h = document.body.clientHeight;
 
   data() {
     return {

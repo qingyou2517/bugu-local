@@ -36,3 +36,16 @@ window.onload = function () {
     window.scrollTo(0, 200);
   }, 0);
 };
+
+// // 软键盘出现前页面的高度
+// const winHeight = window.outerHeight;
+// window.onresize = function(){
+//   // 软键盘出现时页面的高度
+//   const changeHeight = window.outerHeight;
+//   if(winHeight-changeHeight>40){
+//     document.body.style.height=winHeight+"px";
+//   }else{
+//     document.body.style.height='100%';
+//   }
+// }
+

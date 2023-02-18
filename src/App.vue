@@ -7,6 +7,27 @@
   </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'App',
+  mounted() {
+    // 基于窗口的内部高度计算 1vh
+    let vh = window.innerHeight * 0.01
+
+    // 将CSS变量设置为根元素
+    // --vh 相当于 1vh，css用法(如100vh)： height: calc(var(--vh, 1vh)*100)
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+    // 监听 resize，窗口大小改变时重新计算
+    window.addEventListener('resize', () => {
+      let vh = window.innerHeight * 0.01
+      // console.log(vh);
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
+  },
+}
+</script>
+
 <!--App.vue定义全局的样式，所以不能有scoped-->
 <style lang="scss">
 @import "~@/assets/styles/helper.scss";
@@ -28,6 +49,9 @@ body {
   color: #333;
   max-width: 500px;
   margin: 0 auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 #nav {

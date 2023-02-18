@@ -40,7 +40,7 @@ import recordTypeList from '@/constants/recordTypeList';
 })
 export default class Money extends Vue {
  // body的高度
- h = document.body.clientHeight;
+ h = window.innerHeight;
 
   data() {
     return {

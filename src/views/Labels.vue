@@ -1,6 +1,10 @@
 <template>
   <Layout>
-<!--    <h1 class="bugu">布谷布谷，每日一记</h1>-->
+    <div class="projectTitle">
+      <svg class="icon icon-bird">
+        <use xlink:href="#icon-bird"/>
+      </svg>
+    </div>
     <div class="tagsWrapper">
       <router-link class="tagItem"
                    v-for="tag in tags" :key="tag.id"
@@ -9,9 +13,9 @@
         <Icon name="right"/>
       </router-link>
     </div>
-
     <div class="createTag-wrapper">
-      <el-button type="primary" size="medium" class="createTag" @click="createTag">新增<i class="el-icon-edit"></i></el-button>
+      <el-button type="primary" size="medium" class="createTag" @click="createTag">新增<i class="el-icon-edit"></i>
+      </el-button>
     </div>
   </Layout>
 
@@ -41,16 +45,29 @@ export default class Labels extends mixins(TagHelper) {
 </script>
 
 <style lang='scss' scoped>
-//.bugu{
-//  color: #000000;
-//  font-size: 24px;
-//}
+.projectTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+  background: linear-gradient(90deg, rgba(255, 204, 199, 1) 20%, rgba(255, 204, 199, 1) 36%, rgba(255, 163, 158, 1) 60%, rgba(255, 120, 117, 1) 75%);
+
+  > .icon-bird {
+    width: 2.5em;
+    height: 2.5em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+}
+
+
 .tagsWrapper {
   margin-top: 18px;
   background: #f5f5f5;
   font-size: 16px;
   padding-left: 16px;
-  height: calc(100vh - 120px - 54px);
+  height: calc(var(--vh, 1vh)*100 - 120px - 48px - 40px - 56px);
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -67,9 +84,11 @@ export default class Labels extends mixins(TagHelper) {
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
     box-shadow: inset 0 0px 5px -5px rgb(0 0 0 / 25%), inset 0 5px 5px -5px rgb(0 0 0 / 25%);
-    .tag-name{
+
+    .tag-name {
       font-weight: 540;
     }
+
     svg {
       color: #333;
       margin-right: 16px;

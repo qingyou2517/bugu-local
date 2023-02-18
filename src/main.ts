@@ -37,15 +37,20 @@ window.onload = function () {
   }, 0);
 };
 
-// // 软键盘出现前页面的高度
+// // 软键盘出现前视口页面的高度
 // const winHeight = window.outerHeight;
-// window.onresize = function(){
-//   // 软键盘出现时页面的高度
+// window.onresize = function () {
+//   // 软键盘出现时视口页面的高度
 //   const changeHeight = window.outerHeight;
-//   if(winHeight-changeHeight>40){
-//     document.body.style.height=winHeight+"px";
-//   }else{
-//     document.body.style.height='100%';
+//   // 两者之差就是键盘高度：
+//   // 呼出键盘，则 keyboardHeight < 0
+//   // 键盘收起来后，又会调用 window.onresize，此时 keyboardHeight = 0
+//   const keyboardHeight = changeHeight - winHeight;
+//   const app = document.querySelector('app') as HTMLElement;
+//   app.style.bottom = keyboardHeight + 'px';
+//   // 当呼出键盘，就让消息框出现在软键盘上方4px的位置
+//   if (keyboardHeight < 0) {
+//     const messageBox = document.querySelector('.el-message-box') as HTMLElement;
+//     messageBox.style.bottom = 4 - keyboardHeight + 'px';
 //   }
-// }
-
+// };

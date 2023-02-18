@@ -3,7 +3,7 @@
     <div class="new">
       <button @click="createTag">新增标签</button>
     </div>
-    <div class="ul-wrapper">
+    <div class="ul-wrapper" :style="{height:h+'px'}">
       <ul class="current">
         <li v-for="tag in tagList" :key="tag.id"
             :class="{selected: selectedTags.indexOf(tag)>=0}"
@@ -26,6 +26,7 @@ import {mixins} from 'vue-class-component';
 @Component
 export default class Tags extends mixins(TagHelper) {
   selectedTags: string[] = [];
+  h = document.body.clientHeight - 50 - 44 - 40 - 58 - 192 - 54 - 72;
 
   get tagList() {
     return this.$store.state.tagList;
@@ -60,7 +61,7 @@ export default class Tags extends mixins(TagHelper) {
   flex-direction: column-reverse;
 
   > .ul-wrapper {
-    height: calc(100vh - 50px - 44px - 40px - 58px - 192px - 54px - 72px);
+    //height: calc(100vh - 50px - 44px - 40px - 58px - 192px - 54px - 72px);
 
     > .current {
       display: flex;

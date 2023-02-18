@@ -39,6 +39,7 @@ import recordTypeList from '@/constants/recordTypeList';
   components: {Tabs, Tags, Notes, NumberPad},
 })
 export default class Money extends Vue {
+ // body的高度
  h = document.body.clientHeight;
 
   data() {
